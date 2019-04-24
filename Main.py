@@ -4,10 +4,6 @@ import requests
 import datetime
 
 
-
-
-
-
 arduino_data = serial.Serial('com3', 9600)
 
 currentTime = time.localtime()
