@@ -6,12 +6,7 @@ import datetime
 
 arduino_data = serial.Serial('com3', 9600)
 
-currentTime = time.localtime()
-day, year, month, hour, min, sec = currentTime.tm_mday, currentTime.tm_year, currentTime.tm_mon, \
-                                   currentTime.tm_hour, currentTime.tm_min, currentTime.tm_sec
 end = False
-
-answer = None
 
 def getTime():
     # api-endpoint
