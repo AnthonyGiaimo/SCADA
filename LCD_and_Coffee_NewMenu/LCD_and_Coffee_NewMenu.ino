@@ -18,7 +18,7 @@ Right  - 5
 //Pin assignments for DFRobot LCD Keypad Shield
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7); 
 //---------------------------------------------
-int backlight = 256;
+int brew = '0';
 int positionC = 3;
 int localKey = 0;
 int menu = 1; 
@@ -60,7 +60,7 @@ void setup()
   lcd.print("Initializing...");
   pinMode(13, OUTPUT);
   analogWrite(9,0);
-  Serial.begin(9600); // initialize Serial communication
+  Serial1.begin(38400); // initialize Serial communication
   setTime(20, 59, 50, 17, 8, 2018);   
   delay(1000);
 } 
@@ -92,8 +92,9 @@ void loop()
    
   if ((hour() == hourAlarm1) && (minute() == minuteAlarm1) && (second() == 00))
     {
+      brew = '1';
       storedTime = millis();
-      digitalWrite(13, HIGH);
+      Serial1.write(brew);
       menu = 3;
     }
 }
@@ -128,7 +129,8 @@ void timeStringUpdater()
         {
           menu = 3;
           storedTime = millis();
-          digitalWrite(13,HIGH);
+          brew = '1';
+          Serial1.write(brew);
         }break;
         case 14:
         {
@@ -177,13 +179,15 @@ void brewing()
   lcd.cursor();
   if (elapsedTime - storedTime >= brewTime)
   {
-    digitalWrite(13,LOW);
+    brew = '0';
+    Serial1.write(brew);
     menu = 1;
   }
  lcd_key = read_LCD_buttons();
  if (lcd_key == btnSELECT)
  {
-  digitalWrite(13,LOW);
+  brew = '0';
+  Serial1.write(brew);
   menu = 1;
   positionC = 3;
   delay(250);
@@ -481,4 +485,3 @@ void chngTime()
       menu = 1;
       positionC = 3;
 }
-
