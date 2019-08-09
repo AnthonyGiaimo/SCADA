@@ -1,0 +1,2 @@
+kill process:kill_process
+print test:command_protocols.printTest()
