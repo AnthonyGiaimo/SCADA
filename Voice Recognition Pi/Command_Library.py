@@ -75,28 +75,28 @@ def findResponse(audioText):
     return "No found responses", "command"
 
 
-def writeNewResponse(audioText, engine):
+def writeNewResponse(audioText):
     dictionary = load_dictionary("./ResponseDictionary.txt")
     os.system('./speech.sh What would you like my response to be for ')
     os.system('./speech.sh ' + audioText)
     newResponse = raw_input("What would you like me to say (social): ")
     # newResponse = listen()
     dictionary[audioText] = newResponse
-    with open("../Exodus/ResponseDictionary.txt", "a") as write_file:
+    with open("./ResponseDictionary.txt", "a") as write_file:
         for keys in dictionary.keys():
             print(keys + ":" + dictionary[keys])
             write_file.write(keys + ":" + dictionary[keys])
     os.system('./speech.sh Okay, done!')
 
 
-def writeNewCommand(audioText, engine):
+def writeNewCommand(audioText):
     dictionary = load_dictionary("../Exodus/CommandDictionary.txt")
     os.system('./speech.sh What would you like my response to be for ')
     os.system('./speech.sh ' + audioText)
     newResponse = raw_input("What would you like my response to be for (command): ")
     # newResponse = listen()
     dictionary[audioText] = "command_protocols." + newResponse + "()"
-    with open("../Exodus/ResponseDictionary.txt", "r+") as write_file:
+    with open("./ResponseDictionary.txt", "r+") as write_file:
         for keys in dictionary.keys():
             print(keys + ":" + dictionary[keys])
             write_file.write(keys + ":" + dictionary[keys])
@@ -110,11 +110,11 @@ def identifyCommand(command, audioText):
             os.system('./speech.sh Did not find a response in my database')
             os.system('./speech.sh Please tell me if you would like this to be a command')
             # responseText = listen()
-            responseText = raw_input("Please tell me if you would like this to be a command: ")
+            responseText = raw_input("1: new response 2: command ")
             if responseText.lower() == "new response":
-                writeNewResponse(audioText, engine)
+                writeNewResponse(audioText)
             elif responseText.lower() == "command":
-                writeNewCommand(audioText, engine)
+                writeNewCommand(audioText)
             else:
                os.system('./speech.sh Okay I wont record a new response')
     elif (command == "None"):
