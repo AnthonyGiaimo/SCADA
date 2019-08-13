@@ -6,26 +6,25 @@ She will be able to look up information for the owner.
 import pyaudio
 import googleapiclient
 import monotonic
-import pyttsx3
+import os
 import speech_recognition as sr
 from Command_Library import initialize, findResponse, listen, writeNewResponse, identifyCommand
 
 
 def main():
     end = False
-    engine = initialize()
+    initialize()
     while (end != True):
-        audioText = input("Type Something: ")
+        audioText = raw_input("Type Something: ")
         # audioText = listen()
         print(audioText)
         responseText, type_of_command = findResponse(audioText)
         if (responseText == "kill_process"):
             end = True
         elif (type_of_command == "command"):
-            identifyCommand(responseText, engine, audioText)
+            identifyCommand(responseText, audioText)
         elif (type_of_command == "social"):
-            engine.say(responseText)
-            engine.runAndWait()
+            os.system('./speech.sh ' + responseText)
 
 
 if __name__ == "__main__":
