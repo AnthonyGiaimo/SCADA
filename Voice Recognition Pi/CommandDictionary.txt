@@ -1,6 +1,6 @@
 kill process:kill_process
 print test:command_protocols.printTest()
-form one:command_protocols.signIn(0)
+form one:command_protocols.good4di(0)
 form1:command_protocols.good4di(0)
 sign in:command_protocols.good4di(1)
 sign out:command_protocols.good4di(2)
