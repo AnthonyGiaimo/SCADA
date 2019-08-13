@@ -60,12 +60,6 @@ def findResponse(audioText):
     command_dictionary = load_dictionary("./CommandDictionary.txt")
     if audioText == None:
         return "None", "social"
-    elif (audioText[0:4] == "open"):
-        return 'command_protocols.openProgram(' + '"' + audioText[5:] + '"' + ')', "command"
-    elif (audioText[0:6] == "launch"):
-        return 'command_protocols.openProgram(' + '"' + audioText[7:] + '"' + ')', "command"
-    elif (audioText[0:3] == "run"):
-        return 'command_protocols.openProgram(' + '"' + audioText[4:] + '"' + ')', "command"
     for key in social_dictionary.keys():
         if audioText.lower() == key.lower():
             return social_dictionary[key], "social"
@@ -90,7 +84,7 @@ def writeNewResponse(audioText):
 
 
 def writeNewCommand(audioText):
-    dictionary = load_dictionary("../Exodus/CommandDictionary.txt")
+    dictionary = load_dictionary("./CommandDictionary.txt")
     os.system('./speech.sh What would you like my response to be for ')
     os.system('./speech.sh ' + audioText)
     newResponse = raw_input("What would you like my response to be for (command): ")
