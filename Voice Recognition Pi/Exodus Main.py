@@ -17,7 +17,7 @@ def main():
     while (end != True):
         audioText = raw_input("Type Something: ")
         # audioText = listen()
-        print(audioText)
+        # print(audioText) this is for debugging
         responseText, type_of_command = findResponse(audioText)
         if (responseText == "kill_process"):
             end = True
